@@ -17,7 +17,9 @@ const Book = ({ book }) => {
                 <div className="card-body p-0 mt-6 gap-0">
                     <div className='card-actions'>
                         {
-                            tags.map (tag=> <div className="py-1 px-4 rounded-full bg-red-600 font-medium text-[#23BE0A] bg-[#23be0a0d]"> {tag} </div>)
+                            tags.map ((tag, index) => <div 
+                            key={index}
+                            className="py-1 px-4 rounded-full bg-red-600 font-medium text-[#23BE0A] bg-[#23be0a0d]"> {tag} </div>)
                         }
                     </div>
                     <h2 className="text-2xl my-4 font-bold">
