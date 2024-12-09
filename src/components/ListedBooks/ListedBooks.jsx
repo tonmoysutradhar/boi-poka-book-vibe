@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { getStoredReadList } from '../../utility/addToDb';
+import { getStoredReadList, getStoredWishList } from '../../utility/addToDb';
 import Book from '../Book/Book';
 
 const ListedBooks = () => {
 
     const [readList, setReadList] = useState([]);
+    const [wishList, setWishList] = useState([]);
 
     const allReadBooks = useLoaderData();
     useEffect ( ()=> {
@@ -15,8 +16,14 @@ const ListedBooks = () => {
         const storedReadBooksInt = storedReadBooks.map(id => parseInt(id))
 
         const readBookList = allReadBooks.filter(book => storedReadBooksInt.includes(book.bookId));
-
         setReadList(readBookList);
+    }, [])
+    useEffect ( ()=> {
+        const storedWishBooks = getStoredWishList();
+        const storedWishBooksInt = storedWishBooks.map(id => parseInt(id))
+
+        const wishBookList = allReadBooks.filter(book => storedWishBooksInt.includes(book.bookId));
+        setWishList(wishBookList);
     }, [])
 
     return (
@@ -41,7 +48,11 @@ const ListedBooks = () => {
                     </div>
                 </TabPanel>
                 <TabPanel>
-                <h2>Any content 2</h2>
+                    <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+                        {
+                            wishList.map(book => <Book key={book.bookId} book={book}></Book>)
+                        }
+                    </div>
                 </TabPanel>
             </Tabs>
             </div>
