@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Book = ({ book }) => {
 
-    const {bookId, bookName, author, image, tags, category, rating} = book ;
+    const {bookId, bookName, author, image, tags, category, rating, totalPages} = book ;
 
     return (
         <Link to={`/books/${bookId}`}>
@@ -32,6 +32,7 @@ const Book = ({ book }) => {
                     
                     <div className='flex justify-between'>
                         <p className='font-medium'>{category}</p>
+                        <p>{totalPages}</p>
                         <div className='flex gap-1'>
                             <p>{rating}</p>
                             <div className="rating">
