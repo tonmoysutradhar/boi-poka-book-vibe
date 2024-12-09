@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { addToStoredList, addToStoredWishList } from "../../utility/addToDb";
 
 const BookDetails = () => {
   // const {bookId} = useParams();
@@ -13,6 +14,14 @@ const BookDetails = () => {
   const book = data.find((book) => book.bookId === id);
 
   const { bookName, author, image, tags, category, rating , review, totalPages, publisher, yearOfPublishing} = book;
+
+  const handleMarkAsRead = (id)=> {
+    addToStoredList(id);
+  }
+
+  const handleWishList = id => {
+    addToStoredWishList(id);
+  }
 
   return (
     <div className="p-4 ">
@@ -41,8 +50,8 @@ const BookDetails = () => {
                 <p>Rating: {rating}</p>
             </div>
             <div>
-                <button className="btn btn-outline mr-3">Read</button>
-                <button className="btn btn-info">Whislist</button>
+                <button onClick={ ()=> handleMarkAsRead(bookId)} className="btn btn-outline mr-3">Mark As Read</button>
+                <button onClick={ ()=> handleWishList(bookId)} className="btn btn-info">Whislist</button>
             </div>
           </div>
           <div className="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl">
