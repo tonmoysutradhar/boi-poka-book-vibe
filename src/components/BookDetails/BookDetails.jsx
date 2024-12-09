@@ -1,6 +1,9 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { addToStoredList, addToStoredWishList } from "../../utility/addToDb";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BookDetails = () => {
   // const {bookId} = useParams();
@@ -49,9 +52,16 @@ const BookDetails = () => {
                 <p>Year of Publish: {yearOfPublishing}</p>
                 <p>Rating: {rating}</p>
             </div>
-            <div>
-                <button onClick={ ()=> handleMarkAsRead(bookId)} className="btn btn-outline mr-3">Mark As Read</button>
+            <div className="flex">
+                <div>
+                  <button onClick={ ()=> handleMarkAsRead(bookId)} className="btn btn-outline mr-3">Mark As Read</button>
+                  <ToastContainer />
+                </div>
+                <div>
+
                 <button onClick={ ()=> handleWishList(bookId)} className="btn btn-info">Whislist</button>
+                <ToastContainer />
+                </div>
             </div>
           </div>
           <div className="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl">
